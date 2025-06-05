@@ -1,0 +1,17 @@
+<h1>書籍一覧</h1>
+
+<%= link_to "新規登録", books_new_path %>
+
+<% @books.each do |book| %>
+    <div>
+        <p>書籍名: <%= book.book_name %></p>
+        <p>著作名: <%= book.author_name%></p>
+        <p>発行日: <%= book.issue_date %></p>
+        <p>商品表示: <%= book.product_display %></p>
+        <p>価格: <%= book.price %></p>
+        <p>ステータス: <%= book.status %></p>
+    </div>
+
+    <hr>
+
+<% end %>
