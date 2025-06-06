@@ -24,6 +24,34 @@ class BooksController < ApplicationController
     @books = Book.all
   end
 
+  #書籍詳細
+  def show
+    @book = Book.find(params[:id])
+  end
+
+  #書籍編集
+  def edit
+    @book = Book.find(params[:id])
+  end
+
+  #書籍更新
+  def update
+    @book = Book.find(params[:id])
+    if @book.update(book_params)
+      redirect_to book_path
+    else
+      render :edit
+    end
+  end
+
+  #書籍削除
+  def destroy
+    @book = Book.find(params[:id])
+    @book.destroy
+    #書籍一覧にリダイレクト
+    redirect_to books_path
+  end
+
   private
 
   #ストロングパラメータで、フォームから送信されたデータを許可する

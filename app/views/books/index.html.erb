@@ -8,8 +8,9 @@
         <p>著作名: <%= book.author_name%></p>
         <p>発行日: <%= book.issue_date %></p>
         <p>商品表示: <%= book.product_display %></p>
-        <p>価格: <%= book.price %></p>
+        <p>価格: <%= book.price %>円</p>
         <p>ステータス: <%= book.status %></p>
+        <%= link_to "詳細", book_path(book.id) %>
     </div>
 
     <hr>

@@ -1,7 +1,30 @@
 Rails.application.routes.draw do
+  get 'home/index'
+  get 'adminpage/show'
+  get 'mypage/show'
+
+  #ユーザ認証
+  devise_for :users, controllers: {
+    registration: "devise/registrations",
+    session: "users/sessions"
+  }
+  resources :mypage, only: [:show]
+
+  #管理者承認
+  devise_for :admins, controllers: {
+    registration: "admins/registrations",
+    session: "admins/sessions"
+  }
+  resources :adminpage, only: [:show]
+
   get 'books/new'
   post 'books', to: 'books#create'     #登録
   get 'books', to: 'books#index'
+  get 'books/:id', to: 'books#show', as: 'book'
+  get 'books/:id/edit', to: 'books#edit', as: 'edit_book'
+  patch 'books/:id', to: 'books#update'
+  delete 'books/:id', to: 'books#destroy', as: 'destroy_book'
+  root to: 'homes#top'
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

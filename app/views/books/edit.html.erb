@@ -1,6 +1,6 @@
-<h1>書籍新規登録</h1>
+<h1>書籍編集</h1>
 
-<%= form_with model: @book do |f| %>
+<%= form_with(model: @book, local: true) do |f| %>
 
     <div>
         <%= f.label :book_name, "書籍名" %>
@@ -33,6 +33,7 @@
     </div>
 
     <div>
-        <%= f.submit "登録" %>
+        <%= f.submit "更新" %>
     </div>
+
 <% end %>
