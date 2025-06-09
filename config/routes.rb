@@ -17,6 +17,17 @@ Rails.application.routes.draw do
   }
   resources :adminpage, only: [:show]
 
+  #注文関連
+  resources :orders, only: [:new, :create] do
+    collection do
+      get :confirm
+    end
+
+    member do
+      get :coplete
+    end
+  end
+
   get 'books/new'
   post 'books', to: 'books#create'     #登録
   get 'books', to: 'books#index'

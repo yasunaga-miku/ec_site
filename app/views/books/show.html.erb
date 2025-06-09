@@ -12,3 +12,5 @@
 <%= link_to "編集", edit_book_path(@book) %>
 <br>
 <%= link_to "削除", destroy_book_path(@book), data: { turbo_method: :delete, turbo_confirm: '本当に削除しますか？' } %>
+
+<%= link_to "注文する", new_order_path(book_id: @book.id) %>
