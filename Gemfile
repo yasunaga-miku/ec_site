@@ -70,3 +70,5 @@ end
 gem "devise"
 
 gem 'dotenv-rails'
+
+gem "image_processing"

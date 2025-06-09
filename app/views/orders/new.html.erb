@@ -15,7 +15,7 @@
 
     <h4>書籍名</h4>
     <%= @book.book_name %>
-
+    
     <h4>個数</h4>
     <%= form.number_field :quantity %>
 
@@ -24,6 +24,8 @@
     
     <h4>送り先</h4>
     <%= form.text_field :delivery_address %>
+
+    <%= form.hidden_field :book_id, value: @book.id %>
 
     <div class="actions">
         <%= form.submit '注文確認' %>

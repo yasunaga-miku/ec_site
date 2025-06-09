@@ -56,7 +56,7 @@ class BooksController < ApplicationController
 
   #ストロングパラメータで、フォームから送信されたデータを許可する
   def book_params
-    params.require(:book).permit(:book_name, :author_name, :issue_date, :product_display, :price, :status)
+    params.require(:book).permit(:book_name, :author_name, :issue_date, :product_display, :price, :status, :photo)
   end
 
 end

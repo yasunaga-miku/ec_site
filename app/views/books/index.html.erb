@@ -1,6 +1,8 @@
 <h1>書籍一覧</h1>
 
-<%= link_to "新規登録", books_new_path %>
+<% if admin_signed_in? %>
+    <%= link_to "新規登録", books_new_path %>
+<% end %>
 
 <% @books.each do |book| %>
     <div>

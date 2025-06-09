@@ -7,6 +7,9 @@
     <p>商品表示: <%= @book.product_display %></p>
     <p>価格: <%= @book.price %>円</p>
     <p>注文ステータス: <%= @book.status %></p>
+    <%if @book.photo.attached? %>
+        <%= image_tag @book.thumbnail %>
+    <% end %>
 </div>
 
 <%= link_to "編集", edit_book_path(@book) %>

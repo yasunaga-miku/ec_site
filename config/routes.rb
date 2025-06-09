@@ -1,6 +1,4 @@
 Rails.application.routes.draw do
-  get 'home/index'
-  get 'adminpage/show'
   get 'mypage/show'
 
   #ユーザ認証
@@ -15,7 +13,7 @@ Rails.application.routes.draw do
     registration: "admins/registrations",
     session: "admins/sessions"
   }
-  resources :adminpage, only: [:show]
+  resources :adminpagein, only: [:show]
 
   #注文関連
   resources :orders, only: [:new, :create] do
@@ -24,7 +22,7 @@ Rails.application.routes.draw do
     end
 
     member do
-      get :coplete
+      get :complete
     end
   end
 
