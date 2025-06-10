@@ -15,6 +15,11 @@ Rails.application.routes.draw do
   }
   resources :adminpagein, only: [:show]
 
+  #カート関連
+  resources :carts, only: [:show, :destroy]
+  #カートアイテム関連
+  resources :line_items, only: [:create]
+
   #注文関連
   resources :orders, only: [:new, :create] do
     collection do

@@ -4,7 +4,15 @@ class Book < ApplicationRecord
     validates :price, presence: true
     validates :status, presence: true
 
-    #ユーザがアップロードした写真を保持する
+    #関連付け(カート)
+    has_many :line_items, dependent: :destroy
+    has_many :carts, through: :order_details
+
+    #関連付け(注文)
+    has_many :order_details
+    has_many :orders, through: :order_details
+
+    #adminがアップロードした写真を保持する
     has_one_attached :photo
 
     #画像を縦横200×200ピクセルにリサイズする
@@ -16,5 +24,8 @@ class Book < ApplicationRecord
         end
         photo.variant(resize_to_limit: [150,150]).processed
     end
+
+    #Enum(販売状況)
+    enum status: { on_sale: 0, sold_out: 1, test: 2 }
 
 end

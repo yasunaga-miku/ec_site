@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_06_09_065010) do
+ActiveRecord::Schema[7.1].define(version: 2025_06_10_013231) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -62,9 +62,39 @@ ActiveRecord::Schema[7.1].define(version: 2025_06_09_065010) do
     t.date "issue_date"
     t.boolean "product_display"
     t.integer "price", null: false
-    t.integer "status", null: false
+    t.integer "status", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "carts", force: :cascade do |t|
+    t.integer "session_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "line_items", force: :cascade do |t|
+    t.integer "cart_id", null: false
+    t.integer "book_id", null: false
+    t.integer "books_id", null: false
+    t.integer "carts_id", null: false
+    t.integer "quantity", default: 0, null: false
+    t.integer "price", default: 0, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["book_id"], name: "index_line_items_on_book_id"
+    t.index ["cart_id"], name: "index_line_items_on_cart_id"
+  end
+
+  create_table "order_details", force: :cascade do |t|
+    t.integer "book_id", null: false
+    t.integer "orders_id", null: false
+    t.integer "books_id", null: false
+    t.integer "count", null: false
+    t.integer "price", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["book_id"], name: "index_order_details_on_book_id"
   end
 
   create_table "orders", force: :cascade do |t|
@@ -97,4 +127,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_06_09_065010) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "line_items", "books"
+  add_foreign_key "line_items", "carts"
+  add_foreign_key "order_details", "books"
 end

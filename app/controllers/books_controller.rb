@@ -27,6 +27,7 @@ class BooksController < ApplicationController
   #書籍詳細
   def show
     @book = Book.find(params[:id])
+    @line_item = LineItem.new
   end
 
   #書籍編集

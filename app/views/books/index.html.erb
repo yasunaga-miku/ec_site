@@ -12,9 +12,15 @@
         <p>商品表示: <%= book.product_display %></p>
         <p>価格: <%= book.price %>円</p>
         <p>ステータス: <%= book.status %></p>
-        <%= link_to "詳細", book_path(book.id) %>
+        <% if admin_signed_in? || user_signed_in? %>
+            <%= link_to "詳細", book_path(book.id) %>
+        <% end %>
     </div>
-
     <hr>
-
 <% end %>
+
+<% if session[:cart_id] %>
+    <br>
+    <%= link_to "買い物かごを見る", cart_path(session[:cart_id]) %>
+<% end %>
+

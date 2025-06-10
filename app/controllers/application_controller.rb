@@ -22,6 +22,14 @@ class ApplicationController < ActionController::Base
 
     protected
 
+    #カートを取得または作成するメソッド
+    def current_cart
+        @current_cart = Cart.find_by(id: session[:cart_id])
+        @current_cart = Cart.create unless @current_cart
+        session[:cart_id] = @current_cart.id
+        @current_cart
+    end
+
     #サインアップ時にnameとadminn_flgを許可
     def configure_permitted_parameters
         devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :admin_flg])
