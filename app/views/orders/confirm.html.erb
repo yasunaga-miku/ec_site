@@ -1,6 +1,6 @@
 <h1>注文確認</h1>
 
-<%= form_with(model: @order, url: orders_path(@order), data: { turbo: false }) do |form| %>
+<%= form_with(model: @order, url: orders_path(@order), data: { turbo_method: :POST }) do |form| %>
     <% if @order.errors.any? %>
         <div id="error_explanation">
             <h2><%= pluralize(@order.errors.quantity, "error") %> prohibited this srticle from being saved:</h2>
@@ -13,11 +13,16 @@
         </div>
     <% end %>
 
-    <h4>書籍名</h4>
-    <%= @book.book_name %>
-    <%= form.hidden_field :book_id, value: @book.id %>
+    <h4>書籍名 : 個数 : 金額</h4>
+    <% @order_details.each do |detail| %>
+        <div>
+            <%= detail[:name] %> :
+            <%= detail[:count] %> 個 :
+            <%= detail[:price] %> 円
+        </div>
+    <% end %>
 
-    <h4>個数</h4>
+    <h4>合計注文数</h4>
     <%= @order.quantity %> 個
     <%= form.hidden_field :quantity, value: @order.quantity %>
 
@@ -29,8 +34,11 @@
     <%= @order.delivery_address %>
     <%= form.hidden_field :delivery_address, value: @order.delivery_address %>
 
+    <br>
+
     <div class="actions">
         <%= form.submit "注文" %>
     </div>
 <% end %>
     
+<%= link_to "戻る", new_order_path %>

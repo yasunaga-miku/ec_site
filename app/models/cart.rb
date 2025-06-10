@@ -14,7 +14,7 @@ class Cart < ApplicationRecord
 
     #カート内の合計金額を計算
     def total_praice
-        line_items.to_a.sum { |item| item.total_praice }
+        line_items.to_a.sum { |item| item.price }
     end
 
     #カート内の合計個数を計算

@@ -13,7 +13,7 @@ class Users::SessionsController < Devise::SessionsController
   def create
     #ログインが成功したら、継承元のDeviseのcreateを実行後、sessionに値を保存する
     super
-    session[:admin_id] = current_user.id
+    session[:user_id] = current_user.id
   end
 
   # DELETE /resource/sign_out

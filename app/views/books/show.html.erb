@@ -6,7 +6,7 @@
     <p>発行日: <%= @book.issue_date %></p>
     <p>商品表示: <%= @book.product_display %></p>
     <p>価格: <%= @book.price %>円</p>
-    <p>注文ステータス: <%= @book.status %></p>
+    <p>販売状況: <%= I18n.t("enums.book.status.#{@book.status}") %></p>
     <%if @book.photo.attached? %>
         <%= image_tag @book.thumbnail %>
     <% end %>
@@ -17,6 +17,6 @@
     <%= link_to "編集", edit_book_path(@book) %>
     <br>
     <%= link_to "削除", destroy_book_path(@book), data: { turbo_method: :delete, turbo_confirm: '本当に削除しますか？' } %>
-<% elsif user_signed_in? %>
+<% elsif user_signed_in? && @book.status == 'on_sale' %>
     <%= link_to "買い物かごに入れる", line_items_path(book_id: @book.id), data: { turbo_method: :post } %>
 <% end %>

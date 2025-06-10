@@ -11,7 +11,7 @@
         <p>発行日: <%= book.issue_date %></p>
         <p>商品表示: <%= book.product_display %></p>
         <p>価格: <%= book.price %>円</p>
-        <p>ステータス: <%= book.status %></p>
+        <p>販売状況: <%= I18n.t("enums.book.status.#{book.status}") %></p>
         <% if admin_signed_in? || user_signed_in? %>
             <%= link_to "詳細", book_path(book.id) %>
         <% end %>
@@ -19,7 +19,7 @@
     <hr>
 <% end %>
 
-<% if session[:cart_id] %>
+<% if session[:cart_id] && user_signed_in? %>
     <br>
     <%= link_to "買い物かごを見る", cart_path(session[:cart_id]) %>
 <% end %>

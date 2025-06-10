@@ -6,7 +6,7 @@ class Book < ApplicationRecord
 
     #関連付け(カート)
     has_many :line_items, dependent: :destroy
-    has_many :carts, through: :order_details
+    has_many :carts, through: :line_items
 
     #関連付け(注文)
     has_many :order_details
@@ -18,14 +18,14 @@ class Book < ApplicationRecord
     #画像を縦横200×200ピクセルにリサイズする
     def thumbnail
         unless photo.attached?
-            #hoto.variantで画像を加工し、resize_to_fitで縦横比を維持したまま、指定したサイズにリサイズ
+            #photo.variantで画像を加工し、resize_to_fitで縦横比を維持したまま、指定したサイズにリサイズ
             file_path = Rails.root.join('app/assets/images/noimage.png')
-            photo.attach(io: File.open(file_path), filename: 'noimage.png', content_type: 'image/jpeg')
+            photo.attach(io: File.open(file_path), filename: 'noimage.png', content_type: 'image/png')
         end
         photo.variant(resize_to_limit: [150,150]).processed
     end
 
     #Enum(販売状況)
-    enum status: { on_sale: 0, sold_out: 1, test: 2 }
+    enum status: { on_sale: 1, sold_out: 2 }
 
 end
